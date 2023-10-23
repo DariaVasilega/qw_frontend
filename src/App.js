@@ -1,7 +1,4 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+export default function App() {
   const test = () => {
     fetch('https://backend.local/users', {method: 'GET', headers: {'Authorization': 'Bearer ca6599644dd6699e566f51cc53fa626a6277e3ac97fa97116b182331fd8d9e8'}})
         .then(response => response.json())
@@ -26,5 +23,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
