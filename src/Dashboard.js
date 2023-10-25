@@ -42,18 +42,12 @@ export default function Dashboard({props}) {
 
 
     return (
-        <main className="min-h-screen">
-            <div className="sm:ml-64 p-4 md:p-8">
-                <div className="content">
-                    <div className="flex flex-col">
-                        {
-                            statistic.map((stat, index) => (
-                                <Statistic key={index} props={{lection: stat?.lection, progress: stat?.progress}} />
-                            ))
-                        }
-                    </div>
-                </div>
-            </div>
-        </main>
+        <div className="flex flex-col">
+            {
+                statistic.map((stat, index) => (
+                    <Statistic key={index} props={{lection: stat?.lection, progress: stat?.progress}} />
+                ))
+            }
+        </div>
     );
 }
