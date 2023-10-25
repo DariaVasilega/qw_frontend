@@ -7,9 +7,13 @@ export default function LoginForm() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [token, setToken] = useLocalStorage('token', null);
+    const [userEmail, setUserEmail] = useLocalStorage('email', '');
 
     const login = (event) => {
         event.preventDefault();
+
+        setUserEmail(email)
+
         axios.post(`${process.env.REACT_APP_API_URL}/login`, {
             email: email,
             password: password
