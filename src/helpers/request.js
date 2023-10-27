@@ -1,7 +1,7 @@
 import { useLocalStorage } from '@uidotdev/usehooks';
 import axios from 'axios';
 
-const useOptions = () => {
+const useClient = () => {
     const [token] = useLocalStorage('token', null);
     const [language] = useLocalStorage('language', 'uk_UA');
 
@@ -15,17 +15,32 @@ const useOptions = () => {
         options.headers['Authorization'] = `Bearer ${token}`;
     }
 
-    return options;
+    const client = axios.create(options);
+
+    client.interceptors.response.use(
+        response => response,
+        (xhr) => {
+            if (xhr.response.status === 401) {
+                localStorage.clear();
+                window.location.assign('/');
+                window.location.reload();
+            }
+
+            throw xhr;
+        }
+    );
+
+    return client;
 }
 
 export function useGet (url) {
-    const options = useOptions();
+    const client = useClient();
 
-    return (() => axios.get(url, options));
+    return (() => client.get(url));
 }
 
 export function usePost (url, data) {
-    const options = useOptions();
+    const client = useClient();
 
-    return (() => axios.post(url, data ?? {}, options));
+    return (() => client.post(url, data ?? {}));
 }
