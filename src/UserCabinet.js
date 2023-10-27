@@ -4,12 +4,14 @@ import Dashboard from "./Dashboard";
 import Sidebar from "./Sidebar";
 import {useGet} from "./helpers/request";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
+import Lection from "./Dashboard/Lection";
 
 export default function UserCabinet() {
     const [isShownSidebar, setIsShownSidebar] = useState(false);
     const switchSidebar = () => setIsShownSidebar(!isShownSidebar);
     const [lections, setLections] = useState([]);
     const doGetLectionsRequest = useGet(`${process.env.REACT_APP_API_URL}/lections?limit=9999999`);
+    const getLectionById = (id) => lections.filter((lection) => lection.id === parseInt(id)).pop()
 
     useEffect(() => {
         doGetLectionsRequest().then(xhr => setLections(xhr.data.data.lections));
@@ -27,6 +29,7 @@ export default function UserCabinet() {
                             <BrowserRouter basename="/">
                                 <Routes>
                                     <Route path="/" element={<Dashboard props={{lections: lections}} />} />
+                                    <Route path="/lection/:id" element={<Lection props={{getLectionById: getLectionById}} />} />
                                 </Routes>
                             </BrowserRouter>
                         </div>
