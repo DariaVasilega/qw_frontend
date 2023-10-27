@@ -32,8 +32,6 @@ export default function Question({props}) {
                     answerToSubmit: selectedAnswer,
                     isLastQuestion: props.test.questions.at(-1)?.id === question?.id,
                     next: props.next,
-                    progress: props.progress,
-                    setProgress: props.setProgress,
                     setIsPassed: props.setIsPassed
                 }}/>
             </div>

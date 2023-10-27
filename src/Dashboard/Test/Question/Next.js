@@ -19,23 +19,10 @@ export default function Next({props}) {
         }
     );
     const submitAnswer = () => {
-        completeQuestion().then(xhr => {
-            let progress = Object.assign({}, props.progress);
-
-            progress[props.test.id] = props.next;
-
-            props.setProgress(progress);
-            setNext(true);
-            moveTo(`/test/${props.test.id}${props.next ? `/question/${props.next}` : ''}`, { replace: true });
-        }).catch(xhr => {
-            let progress = Object.assign({}, props.progress);
-
-            progress[props.test.id] = null;
-
-            props.setProgress(progress);
-            props.setIsPassed(true);
-            moveTo(`/test/${props.test.id}`)
-        });
+        completeQuestion()
+            .then(() => setNext(true))
+            .catch(() =>  props.setIsPassed(true))
+            .finally(() => moveTo(`/test/${props.test.id}`));
     }
 
     useEffect(() => {

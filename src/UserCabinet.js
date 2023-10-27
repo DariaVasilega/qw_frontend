@@ -31,8 +31,7 @@ export default function UserCabinet() {
                                 <Routes>
                                     <Route path="/" element={<Dashboard props={{lections: lections}} />} />
                                     <Route path="/lection/:id" element={<Lection props={{getLectionById: getLectionById}} />} />
-                                    <Route path="/test/:tid" element={<Test />} />
-                                    <Route path="/test/:tid/question/:qid" element={<Test />} />
+                                    <Route path="/test/:id" element={<Test />} />
                                 </Routes>
                             </BrowserRouter>
                         </div>
