@@ -1,5 +1,6 @@
 import React from "react";
 import Item from "./Sidebar/Item";
+import Dashboard from "./Sidebar/DashboardLink";
 import {BrowserRouter} from "react-router-dom";
 
 export default function Sidebar({props}) {
@@ -8,6 +9,7 @@ export default function Sidebar({props}) {
             <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
                 <ul className="space-y-2 font-medium">
                     <BrowserRouter>
+                       <Dashboard />
                         {
                             props.lections.map(lection => <Item key={lection.id} lection={lection} />)
                         }
