@@ -5,6 +5,7 @@ import Sidebar from "./Sidebar";
 import {useGet} from "./helpers/request";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Lection from "./Dashboard/Lection";
+import Test from "./Dashboard/Test";
 
 export default function UserCabinet() {
     const [isShownSidebar, setIsShownSidebar] = useState(false);
@@ -30,6 +31,8 @@ export default function UserCabinet() {
                                 <Routes>
                                     <Route path="/" element={<Dashboard props={{lections: lections}} />} />
                                     <Route path="/lection/:id" element={<Lection props={{getLectionById: getLectionById}} />} />
+                                    <Route path="/test/:tid" element={<Test />} />
+                                    <Route path="/test/:tid/question/:qid" element={<Test />} />
                                 </Routes>
                             </BrowserRouter>
                         </div>
